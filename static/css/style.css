@@ -1,0 +1,496 @@
+/* Global Styles */
+
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    background-color: #f8f8f8;
+    font-size: 0.9em;
+    color: #333;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    transition: all 0.3s ease-in-out;
+}
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    margin-bottom: 50px; /* Ajustez à la hauteur de la footer */
+}
+
+/* Barre Supérieure */
+header {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-left .logo {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.header-left h1 {
+    font-size: 20px;
+}
+
+.header-right h1 {
+    font-size: 18px;
+}
+
+/* Menu Latéral */
+.sidebar {
+    background-color: #2c3e50;
+    color: white;
+    width: 200px;
+    height: 100vh;
+    position: fixed;
+    top: 60px; /* Décalage sous la barre supérieure */
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar ul li a:hover {
+    background-color: #3498db;
+}
+
+.sidebar ul li a i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+/* Contenu Principal */
+main {
+    margin-left: 220px; /* Décalage pour le menu latéral */
+    margin-top: 70px; /* Décalage pour la barre supérieure */
+    padding: 20px;
+    background-color: #f9f9f9;
+    min-height: calc(100vh - 70px);
+    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 150px;
+    }
+
+    main {
+        margin-left: 170px;
+    }
+
+    .sidebar ul li a {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+
+    .sidebar ul li a i {
+        font-size: 16px;
+    }
+}
+
+/* Barre supérieure */
+.header-right {
+    display: flex;
+    justify-content: center; /* Centre horizontalement le contenu */
+    align-items: center;    /* Centre verticalement le contenu */
+    flex: 1;                /* Prend tout l'espace disponible à droite */
+    text-align: center;
+}
+
+.header-right h2 {
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+/* Centrer la page */
+.home-container {
+    display: flex;
+    background: url("static/image/logo.png") no-repeat center center;
+    background-size: contain; /* Ajuste la taille pour qu'elle s'adapte */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Prend toute la hauteur de la fenêtre */
+    text-align: center;
+
+}
+
+/* Amélioration de la visibilité du texte h3 */
+.home-container h3 {
+    z-index: 1; /* Met le texte au-dessus de l'arrière-plan */
+    font-size: 32px;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Ajoute une ombre portée pour plus de contraste */
+    margin-bottom: 40px;
+    color: white; /* Texte blanc */
+}
+
+
+
+.home-container h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 40px;
+}
+
+/* Icônes centrées */
+.home-icons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.home-icon {
+    text-decoration: none;
+    color: #333;
+    text-align: center;
+    width: 150px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.home-icon i {
+    font-size: 40px;
+    color: #3498db;
+    margin-bottom: 10px;
+}
+
+.home-icon p {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.home-icon:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* page component list */
+
+/* Conteneur principal */
+.component-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+/* Bouton d'ajout */
+.add-button {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 10px;
+    text-align: center;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.add-button:hover {
+    background-color: #2980b9;
+}
+
+/* Tableau */
+table {
+    width: 100%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+    vertical-align: middle;
+}
+
+th {
+    background-color: #3498db;
+    color: white;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+td img {
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 5px;
+}
+
+/* Boutons d'action */
+.actions a, .actions button {
+    text-decoration: none;
+    font-size: 14px;
+    padding: 5px 10px;
+    color: white;
+    background-color: #2ecc71;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.actions button {
+    background-color: #e74c3c;
+}
+
+.actions a:hover {
+    background-color: #27ae60;
+}
+
+.actions button:hover {
+    background-color: #c0392b;
+}
+
+/* Message en cas de données vides */
+.no-data {
+    text-align: center;
+    color: #888;
+    font-size: 14px;
+    padding: 20px;
+}
+
+/* Formulaire component */
+
+
+/* Centrage du formulaire verticalement et horizontalement */
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 100px);
+    padding: 20px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+/* Conteneur principal */
+.form-container {
+    width: 100%;
+    max-width: 450px; /* Réduit la largeur du formulaire */
+    padding: 20px; /* Réduit le padding */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Titres */
+.form-container h1, .form-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 15px; /* Réduit l'espacement sous les titres */
+    font-size: 18px; /* Réduit la taille des titres */
+}
+
+.form-container h2 {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Champs du formulaire */
+.form-fields {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px; /* Réduit l'espacement entre les champs */
+}
+
+.form-fields label, .form-fields input, .form-fields select, .form-fields textarea {
+    width: 100%;
+    max-width: 350px; /* Réduit la largeur maximale des champs */
+    font-size: 14px; /* Réduit la taille du texte */
+    padding: 6px; /* Réduit le padding des champs */
+}
+
+input, select, textarea {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Sous-composants */
+.subcomponent-row {
+    margin-top: 8px; /* Réduit l'espacement entre les sous-composants */
+    padding: 8px; /* Réduit le padding des sous-composants */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+    font-size: 14px; /* Taille réduite pour les sous-composants */
+}
+
+/* Messages d'erreur */
+.error-message {
+    color: red;
+    font-size: 12px; /* Réduit la taille du texte des erreurs */
+    margin-top: 5px;
+}
+
+/* Boutons */
+button[type="submit"]:not(.delete-button){
+    display: block;
+    width: 100%;
+    padding: 8px; /* Réduit la hauteur des boutons */
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px; /* Réduit la taille du texte des boutons */
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px; /* Réduit l'espacement au-dessus des boutons */
+    transition: background-color 0.3s ease;
+}
+
+
+button[type="submit"]:not(.delete-button):hover {
+    background-color: #27ae60;
+}
+
+/* Conteneur des actions */
+.action-buttons {
+    display: flex; /* Affiche les boutons côte à côte */
+    flex-direction: column;
+    justify-content: center; /* Centre horizontalement les boutons */
+    align-items: center; /* Aligne verticalement */
+    gap: 0px; /* Ajoute un espacement horizontal entre les boutons */
+}
+
+/* Bouton Modifier */
+.edit-button {
+    text-decoration: none;
+    color: white;
+    background-color: #3498db;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px; /* Espacement entre l'icône et le texte */
+    transition: background-color 0.3s ease;
+}
+
+.edit-button i {
+    font-size: 16px;
+}
+
+.edit-button:hover {
+    background-color: #2980b9;
+}
+
+
+.back-button {
+    display: block;
+    margin: 15px auto 0;
+    text-align: center;
+    padding: 8px 16px; /* Réduit le padding du bouton de retour */
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px; /* Réduit la taille du texte du bouton */
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #2980b9;
+}
+
+/* order list */
+
+/* Boutons Modifier */
+.update-button {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.update-button:hover {
+    color: #2980b9;
+}
+
+/* Bouton Supprimer */
+form .delete-button {
+    background-color: #e74c3c; /* Rouge pour suppression */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+form .delete-button:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+}
+
+
+

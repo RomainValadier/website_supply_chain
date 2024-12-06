@@ -1,0 +1,138 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+
+    /*background-image: url('images/logoSC.png');*/
+
+    background-image: url('images/logo.jpg');
+
+    background-position: center;
+    /* Centrer l'image dans la page */
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+}
+
+.login-container,
+.order-container,
+.details-container {
+    width: 500px;
+    padding: 35px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+}
+
+.order-container {
+    margin-left: 210px;
+}
+
+
+h2 {
+    margin-top: 0;
+}
+
+table {
+    width: 100%;
+    margin: 22px 0;
+}
+
+input,
+button {
+    width: 100%;
+    padding: 9px;
+    margin: 9px 0;
+}
+
+button {
+    cursor: pointer;
+    background-color: #002fff;
+    color: white;
+    border: none;
+    /*border-radius: 5px;*/
+}
+
+.supply-chain-info {
+    margin-top: 20px;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}
+
+.supply-chain-info table {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.supply-chain-info td {
+    padding: 5px 10px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    background-color: #f8f8f8;
+    font-size: 0.9em;
+    color: #333;
+}
+
+.skate-image-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.skate-image {
+    max-width: 40%;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    padding: 2px;
+}
+
+.component-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.component-image {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+
+/* new component */
+.add-component-container {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.add-component-container h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+
+
+/* Style pour le logo */
+.company-logo {
+    max-width: 200px;
+    /* Limiter la largeur du logo */
+    height: auto;
+    /* Garder le ratio de l'image */
+}

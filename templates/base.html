@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SkatExpress{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Barre supérieure -->
+     <header>
+        <div class="header-left">
+            <img src="{% static 'image/logo.png' %}" alt="Logo" class="logo">
+            <h1>SkatExpress</h1>
+        </div>
+        <div class="header-right">
+            <h2>{% block header_title %}{% endblock %}</h2>
+        </div>
+    </header>
+
+    <!-- Menu latéral -->
+    <aside class="sidebar">
+        <ul>
+            <li>
+                <a href="{% url 'homepage' %}" class="nav-item">
+                <i class="fas fa-home"></i>
+                    <span>Accueil</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'component_list' %}" class="nav-item">
+                <i class="fas fa-cogs"></i>
+                    <span>Composants</span>
+                </a>
+            </li>
+            <li> 
+                <a href="{% url 'order_list' %}" class="nav-item">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Commandes</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'stock_list' %}" class="nav-item">
+                <i class="fas fa-box"></i>
+                <span>Stocks</span>
+            </a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Contenu principal -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+
+<!-- team members -->
+<footer class="footer">
+    <p> © 2024 SkatExpress : Projet réalisé par Maé Benaroche, Téanie Miosotis, Romain Valadier</p>
+</footer>
+
+
+</html>

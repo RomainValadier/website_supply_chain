@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Modifier la Commande{% endblock %}
+
+{% block header_title %}Modifier la Commande{% endblock %}
+
+{% block content %}
+<div class="form-wrapper">
+    <div class="form-container">
+        <h1>Modifier la Commande</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="submit-button">Enregistrer les modifications</button>
+        </form>
+        <!-- Bouton pour retourner à la liste des commandes -->
+        <a href="{% url 'order_list' %}" class="back-button">Retour à la liste des commandes</a>
+    </div>
+</div>
+{% endblock %}

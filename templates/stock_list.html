@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static  %}
+{% block title %}Liste des Stocks{% endblock %}
+
+{% block header_title %}Liste des Stocks{% endblock %}
+
+{% block content %}
+<div class="table-container">
+    <h1 style="text-align: center;">Liste des Stocks</h1>
+     <!-- Lien pour accéder à l'évolution des stocks -->
+    <div style="text-align: center; margin-bottom: 20px;">
+        <a href="{% url 'stock_evolution' %}" style="text-decoration: none; display: inline-flex; align-items: center; gap: 10px; color: #3498db; font-size: 1.1em;">
+            <img src="{% static 'image/graph-icon.jpg' %}" alt="Graphique" style="max-width: 30px; max-height: 30px;">
+            Voir l'évolution des stocks
+        </a>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Composant</th>
+                <th>Quantité en Stock</th>
+                <th>Date de Mise à Jour</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in stocks %}
+            <tr>
+                <td>
+                    {% if stock.component.image %}
+                        <img src="{{ stock.component.image.url }}" alt="Image de {{ stock.component.name }}" style="max-width: 100px; max-height: 100px; border-radius: 4px;">
+                    {% else %}
+                        Aucune image disponible
+                    {% endif %}
+                </td>
+                <td>{{ stock.component.name }}</td>
+                <td>{{ stock.quantity_on_hand }}</td>
+                <td>{{ stock.date }}</td>
+                <td>
+                    <a href="{% url 'update_stock' stock.component.pk %}" class="update-button">
+                        <i class="fas fa-edit"></i> Mettre à jour
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" style="text-align: center;">Aucun stock enregistré.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

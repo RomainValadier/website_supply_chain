@@ -1,0 +1,24 @@
+digraph "Component Hierarchy" {
+	rankdir=TB size=10
+	Skate [shape=box]
+	Board [shape=ellipse]
+	Skate -> Board
+	Board [shape=box]
+	Trucks [shape=ellipse]
+	Skate -> Trucks
+	Trucks [shape=box]
+	Wheels [shape=ellipse]
+	Skate -> Wheels
+	Wheels [shape=box]
+	Tire [shape=ellipse]
+	Wheels -> Tire
+	Tire [shape=box]
+	Rim [shape=ellipse]
+	Wheels -> Rim
+	Rim [shape=box]
+	Screws [shape=ellipse]
+	Wheels -> Screws
+	Screws [shape=box]
+	Screws [shape=ellipse]
+	Skate -> Screws
+}

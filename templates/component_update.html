@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Modifier un Composant{% endblock %}
+
+{% block header_title %}Modifier un Composant{% endblock %}
+
+{% block content %}
+<div class="form-wrapper">
+    <div class="form-container">
+        <h1>Modifier un Composant</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="submit-button">Enregistrer les modifications</button>
+        </form>
+        <!-- Bouton pour revenir à la liste des composants -->
+        <a href="{% url 'component_list' %}" class="back-button">Retour à la liste des composants</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block title %}Créer une Commande{% endblock %}
+
+{% block header_title %}Créer une Nouvelle Commande{% endblock %}
+
+{% block content %}
+<div class="form-wrapper">
+    <div class="form-container">
+        <h1>Créer une Nouvelle Commande</h1>
+        <form method="post" id="order-form">
+            {% csrf_token %}
+            {{ order_form.as_p }}
+
+            <!-- Afficher la date limite -->
+            <p>Date Limite de Commande : <span id="order-deadline">---</span></p>
+            <p>Nombre de semaine : <span id="number-of-weeks">---</span></p>
+
+            <!-- Afficher l'image du composant sélectionné -->
+            <div id="component-image-container" style="text-align: center; margin-top: 20px;">
+                <img id="component-image" src="" alt="Aucune image disponible" style="max-width: 200px; max-height: 200px; display: none;">
+            </div>
+
+            <button type="submit">Soumettre</button>
+        </form>
+
+        <!-- Bouton pour revenir à la liste des commandes -->
+        <a href="{% url 'order_list' %}" class="back-button">Retour à la liste des commandes</a>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Fonction pour appeler l'API AJAX et mettre à jour la date limite et l'image
+        function updateComponentDetails() {
+            var componentId = $('#id_component').val();  // Récupère l'ID du composant sélectionné
+
+            if (componentId) {
+                $.ajax({
+                    url: "{% url 'create_order' %}",  // Assurez-vous que cette URL pointe vers votre vue AJAX
+                    type: "POST",
+                    data: {
+                        'component_id': componentId,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    success: function (response) {
+                        if (response.deadline) {
+                            $('#order-deadline').text(response.deadline);
+                        } else {
+                            $('#order-deadline').text('Erreur dans le calcul.');
+                        }
+                        
+                        // Met à jour le nombre de semaines si disponible
+                    if (response.numbers_of_weeks) {
+                        $('#number-of-weeks').text(response.numbers_of_weeks + " semaines");
+                    } else {
+                        $('#number-of-weeks').text('Non disponible.');
+                    }
+
+                        // Met à jour l'image si disponible
+                        if (response.image_url) {
+                            $('#component-image').attr('src', response.image_url).show();
+                        } else {
+                            $('#component-image').hide();
+                        }
+                    },
+                    error: function () {
+                        alert("Une erreur s'est produite lors de la récupération des détails du composant.");
+                    }
+                });
+            } else {
+                // Réinitialise l'image et la date limite si aucun composant n'est sélectionné
+                $('#order-deadline').text('---');
+                $('#number-of-weeks').text('---');
+                $('#component-image').hide();
+            }
+        }
+
+        // Déclenche le calcul lorsqu'un composant est sélectionné
+        $('#id_component').change(function () {
+            updateComponentDetails();
+        });
+    });
+</script>
+{% endblock %}

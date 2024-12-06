@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Modifier un Composant{% endblock %}
+
+{% block header_title %}Modifier un Composant{% endblock %}
+
+{% block content %}
+<div class="form-wrapper">
+    <div class="form-container">
+        <h1>Modifier {{ component.name }}</h1>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <!-- Section pour le composant principal -->
+            <fieldset>
+                <legend>Composant Principal</legend>
+                {{ form.as_p }}
+            </fieldset>
+
+            <!-- Section pour les sous-composants -->
+            <fieldset>
+                <legend>Sous-composants</legend>
+                {{ formset.management_form }}
+                {% for sub_form in formset %}
+                    <div class="subcomponent-form">
+                        {{ sub_form.as_p }}
+                        {% if sub_form.DELETE %}
+                            <label for="{{ sub_form.DELETE.id_for_label }}">Supprimer ce sous-composant</label>
+                            {{ sub_form.DELETE }}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </fieldset>
+
+            <!-- Bouton de soumission -->
+            <button type="submit" class="submit-button">Enregistrer les modifications</button>
+        </form>
+        
+        <!-- Bouton pour revenir à la liste des composants -->
+        <a href="{% url 'component_list' %}" class="back-button">Retour à la liste des composants</a>
+    </div>
+</div>
+{% endblock %}

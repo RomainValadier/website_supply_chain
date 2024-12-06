@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Mettre à Jour le Stock{% endblock %}
+
+{% block header_title %}Mettre à Jour le Stock{% endblock %}
+
+{% block content %}
+<div class="form-wrapper">
+    <div class="form-container">
+        <h1>Mettre à jour le stock pour "{{ form.instance.component.name }}"</h1>
+        
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="submit-button">Mettre à jour</button>
+        </form>
+
+        <!-- Bouton pour retourner à la liste des stocks -->
+        <a href="{% url 'stock_list' %}" class="back-button">Retour à la liste des stocks</a>
+    </div>
+</div>
+{% endblock %}

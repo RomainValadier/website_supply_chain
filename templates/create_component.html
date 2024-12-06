@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Créer un Composant{% endblock %}
+
+{% block header_title %}Créer un Nouveau Composant{% endblock %}
+
+{% block content %}
+<div class="form-wrapper">
+    <div class="form-container">
+        <h1>Créer un Nouveau Composant</h1>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- Affiche les erreurs globales du formulaire principal -->
+            {% if component_form.non_field_errors %}
+                <div class="error-message">{{ component_form.non_field_errors }}</div>
+            {% endif %}
+            
+            <!-- Formulaire principal pour le composant -->
+            {{ component_form.as_p }}
+            {% for field in component_form %}
+                {% if field.errors %}
+                    <div class="error-message">{{ field.errors }}</div>
+                {% endif %}
+            {% endfor %}
+
+            <h2>Sous-composants</h2>
+            <!-- Affiche les erreurs globales du formset -->
+            {% if formset.non_form_errors %}
+                <div class="error-message">{{ formset.non_form_errors }}</div>
+            {% endif %}
+
+            <!-- Formset pour les sous-composants -->
+            {{ formset.management_form }}
+            {% for form in formset %}
+            <div class="subcomponent-row">
+                <label>{{ form.sub_component.label }}</label> {{ form.sub_component }}
+                <label>{{ form.quantity_needed.label }}</label> {{ form.quantity_needed }}
+                
+                <!-- Affiche les erreurs du formulaire individuel -->
+                {% if form.errors %}
+                <div class="error-message">
+                    {% for error in form.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+            
+            <button type="submit">Créer le composant</button>
+        </form>
+
+        <!-- Bouton pour retourner à la liste des composants -->
+        <a href="{% url 'component_list' %}" class="back-button">Retour à la liste des composants</a>
+    </div>
+</div>
+{% endblock %}

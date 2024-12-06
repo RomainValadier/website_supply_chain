@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a new component</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="add-component-container">
+        <h2>Add a new component</h2>
+        <form id="addComponentForm" onsubmit="submitNewComponent(event)">
+            <label for="componentName">Component Name:</label>
+            <input type="text" id="componentName" required>
+
+            <label for="annualDemand">Annual Demand:</label>
+            <input type="number" id="annualDemand" required>
+
+            <label for="purchaseCost">Purchase Cost (€):</label>
+            <input type="number" id="purchaseCost" required>
+
+            <label for="holdingCostRate">Holding Cost Rate (%):</label>
+            <input type="number" id="holdingCostRate" required>
+
+            <label for="orderingCost">Ordering Cost (€):</label>
+            <input type="number" id="orderingCost" required>
+
+            <button type="submit">Submit</button>
+        </form>
+        <button onclick="window.location.href='order.html'">Return to Orders</button>"
+    </div>
+    <script src="script.js"></script>
+</body>
+
+
+
+<!-- team members -->
+<footer class="footer">
+    <p>Projet réalisé par Maé Benaroche, Téanie Miosotis, Romain Valadier</p>
+</footer>
+
+</html>

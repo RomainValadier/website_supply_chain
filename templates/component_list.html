@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}Liste des Composants{% endblock %}
+
+{% block header_title %}Liste des Composants{% endblock %}
+
+{% block content %}
+<div class="component-container">
+    <a href="{% url 'create_component' %}" class="add-button">Ajouter un nouveau composant</a>
+    <!-- Bouton unique pour voir la hiérarchie -->
+    <div style="text-align: center; margin: 20px 0;">
+        <a href="{% url 'hierarchy' %}" class="add-button">Voir la hiérarchie des composants</a>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Nom</th>
+                <th>Coût par unité</th>
+                <th>Coût de stockage</th>
+                <th>Lead Time</th>
+                <th>Quantité minimale</th>
+                <th>Sous-composants (Quantités)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for component in components %}
+            <tr>
+                <td>
+                    {% if component.image %}
+                        <img src="{{ component.image.url }}" alt="Image de {{ component.name }}" style="max-width: 100px; max-height: 100px;">
+                    {% else %}
+                        Pas d'image
+                    {% endif %}
+                </td>
+                <td>{{ component.name }}</td>
+                <td>{{ component.cost_per_unit }}</td>
+                <td>{{ component.holding_cost }}</td>
+                <td>{{ component.lead_time }}</td>
+                <td>{{ component.minimum_order_quantity }}</td>
+                <td>
+                    {% with subcomponents=component.parent_component.all %}
+                    {% if subcomponents %}
+                        {% for subcomponent in subcomponents %}
+                            {{ subcomponent.sub_component.name }} ({{ subcomponent.quantity_needed }}){% if not forloop.last %}<br>{% endif %}
+                        {% endfor %}
+                    {% else %}
+                        Aucun sous-composant
+                    {% endif %}
+                    {% endwith %}
+                </td>
+                <td class="actions">
+                    <a href="{% url 'update_component2' component.id %}" class="edit-button">Modifier</a>
+                    <form method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="component_id" value="{{ component.id }}">
+                        <button type="submit" class="delete-button">
+                            <i class="fas fa-trash"></i> Supprimer
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="8" class="no-data">Aucun composant disponible.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

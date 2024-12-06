@@ -1,0 +1,25 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Accueil{% endblock %}
+{% block header_title %}Bienvenue sur SkatExpress{% endblock %}
+{% block content %}
+<div class="home-container" style="background: url('{% static "image/logo.png" %}') no-repeat center center; background-size: contain; ">
+    <h3>Bienvenue sur le système de gestion des Skates</h3>
+    <div class="home-icons">
+        <a href="{% url 'component_list' %}" class="home-icon">
+            <i class="fas fa-cogs"></i>
+            <p>Consulter les Composants</p>
+        </a>
+        <a href="{% url 'order_list' %}" class="home-icon">
+            <i class="fas fa-shopping-cart"></i>
+            <p>Consulter les Commandes</p>
+        </a>
+        <a href="{% url 'stock_list' %}" class="home-icon">
+            <i class="fas fa-box"></i>
+            <p>Consulter les Stocks</p>
+        </a>
+    </div>
+</div>
+{% endblock %}

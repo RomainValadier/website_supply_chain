@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Hiérarchie des Composants{% endblock %}
+
+{% block content %}
+<div>
+    <h1 style="text-align: center;">Hiérarchie des Composants</h1>
+    <div id="hierarchy-graph"></div>
+</div>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const figure = JSON.parse('{{ figure_json|escapejs }}');
+        Plotly.newPlot('hierarchy-graph', figure.data, figure.layout);
+    });
+</script>
+{% endblock %}

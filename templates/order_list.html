@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}Liste des Commandes{% endblock %}
+
+{% block header_title %}Liste des Commandes{% endblock %}
+
+{% block content %}
+<div class="table-container">
+    <h2 class="center-text">MRP pour les Skates</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Date de Réception</th>
+                <th>Quantité Brute Commandée</th>
+                <th>Supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for gross_requirement in gross_requirements %}
+            <tr>
+                <td>{{ gross_requirement.order_date }}</td>
+                <td>{{ gross_requirement.gross_requirements }}</td>
+                <td>
+                    <form method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette commande ?');">
+                        {% csrf_token %}
+                        <input type="hidden" name="order_id" value="{{ gross_requirement.id }}">
+                        <button type="submit" class="delete-button">
+                            <i class="fas fa-trash"></i> Supprimer
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" class="center-text">Aucune commande de skate n'a été passée.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="table-container">
+    <a href="{% url 'create_order' %}" class="add-button">Ajouter une nouvelle commande</a>
+
+    {% for component, component_orders in orders_by_component.items %}
+    <h3 class="center-text">{{ component.name }}</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Date de Réception</th>
+                <th>Besoins Bruts</th>
+                <th>Quantité en Stock</th>
+                <th>Besoin Net</th>
+                <th>Coût</th>
+                <th>Date de Lancement</th>
+                <th>Quantité Commandée</th>
+                <th>Modifier</th>
+                <th>Supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in component_orders %}
+            <tr>
+                <td>{{ order.order_date }}</td>
+                <td>{{ order.gross_requirements }}</td>
+                <td>{{ order.stock.quantity_on_hand }}</td>
+                <td>{{ order.net_requirement }}</td>
+                <td>{{ order.cost }}</td>
+                <td>{{ order.order_release_date }}</td>
+                <td>{{ order.planned_order_receipt }}</td>
+                <td>
+                    <a href="{% url 'update_order' order.pk %}" class="update-button">Modifier</a>
+                </td>
+                <td>
+                    <form method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette commande et toutes ses dépendances ?');">
+                        {% csrf_token %}
+                        <input type="hidden" name="order_id" value="{{ order.id }}">
+                        <button type="submit" class="delete-button">
+                            <i class="fas fa-trash"></i> Supprimer
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="9" class="center-text">Aucune commande enregistrée pour ce composant.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endfor %}
+</div>
+{% endblock %}
+

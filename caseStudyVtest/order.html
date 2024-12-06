@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select your order</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+
+<body>
+    <div class="order-container">
+        <h2>Select your order</h2>
+        <form id="orderForm" onsubmit="return submitOrder()">
+            <table>
+                <tr>
+                    <th>Quantity</th>
+                    <th>Destination</th>
+                    <th>Date & Time</th>
+                </tr>
+                <tr>
+                    <td><input type="number" id="quantity" min="1" required></td>
+                    <td><input type="text" id="destination" required></td>
+                    <td><input type="datetime-local" id="dateTime" required></td>
+                </tr>
+            </table>
+            <button type="submit">Submit</button>
+
+            <!-- Button to create a new component -->
+            <div class="button-container">
+                <button class="create-component-btn" onclick="window.location.href='newcomponent.html'">Create New
+                    Component</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- photo du skate -->
+    <div class="skate-image-container">
+        <h3>Skate Components</h3>
+        <img src="images/skate.jpg" alt="Skate with Components" class="skate-image">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+
+
+
+
+<!-- team members -->
+<footer class="footer">
+    <p>Projet réalisé par Maé Benaroche, Téanie Miosotis, Romain Valadier</p>
+</footer>
+
+</html>

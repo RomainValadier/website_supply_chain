@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order's Info</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+
+<body>
+    <div class="details-container">
+        <h2>Order's Info</h2>
+
+        <!-- Menu to choose the component on the list -->
+        <label for="componentSelect">Choose a component :</label>
+        <select id="componentSelect" onchange="updateComponentInfo()">
+            <option value="Trucks">Trucks</option>
+            <option value="Board">Board</option>
+            <option value="Wheels">Wheels</option>
+            <option value="Tire">Tire</option>
+            <option value="Screws">Screws</option>
+            <option value="Rim">Rim</option>
+        </select>
+
+        <!-- Section pour afficher les informations du composant sélectionné -->
+        <div class="supply-chain-info">
+            <h3>Info on the component</h3>
+            <table>
+                <tr>
+                    <td>Annual Demand:</td>
+                    <td><span id="annualDemand">5000</span> units</td>
+                </tr>
+                <tr>
+                    <td>Purchase Cost:</td>
+                    <td><span id="purchaseCost">-</span> €/unit</td>
+                </tr>
+                <tr>
+                    <td>Holding Cost per Year:</td>
+                    <td><span id="holdingCost">-</span> % of Purchase Cost</td>
+                </tr>
+                <tr>
+                    <td>Ordering/Setup Cost:</td>
+                    <td><span id="orderingCost">-</span> €</td>
+                </tr>
+                <tr>
+                    <td>EOQ (Economic Order Quantity):</td>
+                    <td><span id="EOQ">-</span> units</td>
+                </tr>
+                <tr>
+                    <td>Number of Orders per Year:</td>
+                    <td><span id="numOrders">-</span></td>
+                </tr>
+                <tr>
+                    <td>Working Days per Year:</td>
+                    <td><span id="workingDays">200</span> days</td>
+                </tr>
+                <tr>
+                    <td>Time Between Orders:</td>
+                    <td><span id="timeBetweenOrders">-</span> days</td>
+                </tr>
+            </table>
+        </div>
+
+        <button onclick="goBackToOrder()">Return</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+<!-- Image of the selected component -->
+<div class="component-image-container">
+    <img id="componentImage" src="images/trucks.jpg" alt="Component Image" class="component-image">
+</div>
+
+
+<script>
+    // Load components from localStorage and populate the select dropdown
+    function populateComponentSelect() {
+        const componentSelect = document.getElementById("componentSelect");
+        const components = JSON.parse(localStorage.getItem('componentData')) || componentData;
+
+        // Clear existing options
+        componentSelect.innerHTML = '';
+
+        // Add options for each component
+        for (const name in components) {
+            const option = document.createElement("option");
+            option.value = name;
+            option.textContent = name;
+            componentSelect.appendChild(option);
+        }
+
+        // Call updateComponentInfo() to populate the info for the default selection
+        updateComponentInfo();
+    }
+
+    // Function to update the component information based on selection
+    function updateComponentInfo() {
+        const component = document.getElementById("componentSelect").value;
+        const components = JSON.parse(localStorage.getItem('componentData')) || componentData;
+        const data = components[component];
+
+        // Calculate EOQ, number of orders, time between orders
+        const EOQ = Math.sqrt((2 * data.annualDemand * data.orderingCost) / (data.purchaseCost * data.holdingCostRate)).toFixed(2);
+        const numOrders = (data.annualDemand / EOQ).toFixed(2);
+        const workingDays = 200;
+        const timeBetweenOrders = (workingDays / numOrders).toFixed(2);
+
+        // Update the table with the component information
+        document.getElementById("annualDemand").textContent = data.annualDemand;
+        document.getElementById("purchaseCost").textContent = data.purchaseCost;
+        document.getElementById("holdingCost").textContent = (data.holdingCostRate * 100).toFixed(2);
+        document.getElementById("orderingCost").textContent = data.orderingCost;
+        document.getElementById("EOQ").textContent = EOQ;
+        document.getElementById("numOrders").textContent = numOrders;
+        document.getElementById("timeBetweenOrders").textContent = timeBetweenOrders;
+
+        // Update the component image
+        const componentImage = document.getElementById("componentImage");
+        componentImage.src = data.image;
+        componentImage.alt = `Image of ${component}`;
+    }
+
+    // Call populateComponentSelect when the page is loaded
+    document.addEventListener("DOMContentLoaded", populateComponentSelect);
+</script>
+
+
+<!-- team members -->
+<footer class="footer">
+    <p>Projet réalisé par Maé Benaroche, Téanie Miosotis, Romain Valadier</p>
+</footer>
+
+</html>
